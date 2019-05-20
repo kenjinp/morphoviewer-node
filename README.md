@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/kenjinp/serverside-threejs" target="_blank" rel="noopener noreferrer">
-    <img width="300" src="https://raw.githubusercontent.com/kenjinp/serverside-threejs/master/example.png" alt="serverside-threejs">
+    <img width="300" src="https://raw.githubusercontent.com/kenjinp/morphoviewer-node/master/example.png" alt="serverside-neurons">
   </a>
 </p>
 
