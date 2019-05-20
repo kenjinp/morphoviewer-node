@@ -4,6 +4,6 @@
   </a>
 </p>
 
-# THREE in the SERVER
+# Server Rendered Neurons
 
 A simple example of using `three` to render a canvas server side, and sending that via network as an image using express.
