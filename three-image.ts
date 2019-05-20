@@ -1,69 +1,40 @@
-// Assign this to global so that the subsequent modules can extend it:
-import * as THREE from "three-canvas-renderer";
-import { Canvas } from "canvas";
+import { MorphoViewer } from "morphoviewer-node";
+import { SwcParser } from "swcmorphologyparser";
+import { readFileSync } from "fs";
+import { resolve } from "path";
 
-const mimeType = "image/png";
-
-function getRandomArbitrary(min, max) {
-  return Math.random() * (max - min) + min;
-}
-
-function getRandomInt(max) {
-  return getRandomArbitrary(0, max);
-}
-
-const makeCube = () => {
-  const cube = new THREE.Object3D();
-  const geometry = new THREE.BoxGeometry(1, 1, 1);
-  for (var i = 0; i < geometry.faces.length; i += 2) {
-    var hex = Math.random() * 0xffffff;
-    geometry.faces[i].color.setHex(hex);
-    geometry.faces[i + 1].color.setHex(hex);
-  }
-
-  const material = new THREE.MeshBasicMaterial({
-    vertexColors: THREE.FaceColors
-    // overdraw: 0.5
-  });
-
-  cube.add(new THREE.Mesh(geometry, material));
-  cube.position.set(
-    getRandomArbitrary(-200, 200),
-    getRandomArbitrary(-200, 200),
-    getRandomArbitrary(-200, 200)
-  );
-  cube.rotation.set(getRandomInt(360), getRandomInt(360), getRandomInt(360));
-  return cube;
-};
+const logWithDate = startDate => message =>
+  console.log(`${Date.now() - startDate} ${message}`);
 
 export default () => {
-  const numCubes = 1000;
-  const w = 600;
-  const h = 600;
+  const log = logWithDate(Date.now());
+  const morphoViewer = new MorphoViewer();
+  // return canvas.toBuffer(mimeType);
+  log("reading file");
+  const data = readFileSync(resolve(__dirname, "./Morphology.swc"), "utf8");
 
-  const scene = new THREE.Scene();
-
-  const camera = new THREE.PerspectiveCamera(70, 1, 1, 100);
-  camera.position.y = 0;
-  camera.position.z = 200;
-
-  for (var i = 0; i < numCubes; i++) {
-    const cube = makeCube();
-    scene.add(cube);
+  log("parsing file");
+  const swcParser = new SwcParser();
+  swcParser.parse(data);
+  const rawMorpho = swcParser.getRawMorphology();
+  log("done parsing file");
+  if (rawMorpho) {
+    // we display a morpho, second param is it's name (null: a autogenarated will do)
+    // last param is "do we focus the camera on it"
+    morphoViewer.addMorphology(rawMorpho, {
+      focusOn: true, // do we want the camera to focus on this one when it's loaded?
+      asPolyline: false, // with polylines of with cylinders?
+      onDone: null, // what to do when it's loaded?
+      //color: Math.floor(Math.random() * 0xFFFFFF), // if not present, all neurones will have there axon in blue, basal dendrite in red and apical dendrite in green
+      somaMode: "fromOrphanSections"
+      //somaMode: "default",
+    });
+    log("added Morpho to new scene");
+    log("taking screenie");
+    const imageData = morphoViewer.takeScreenshot();
+    morphoViewer.destroy();
+    return imageData;
+  } else {
+    throw new Error("no morpho");
   }
-
-  const canvas = new Canvas(w, h);
-  // @ts-ignore
-  canvas.style = {}; // dummy shim to prevent errors during render.setSize
-
-  const renderer = new THREE.CanvasRenderer({
-    canvas: canvas,
-    alpha: true
-  });
-
-  renderer.setClearColor(0xffffff, 0);
-  renderer.setSize(600, 600);
-  renderer.render(scene, camera);
-
-  return canvas.toBuffer(mimeType);
 };

@@ -1,5 +1,5 @@
 {
-  "name": "morphoviewer-node",
+  "name": "morphoviewer-server",
   "version": "1.0.0",
   "description": "",
   "main": "./server.ts",
@@ -11,6 +11,8 @@
   "dependencies": {
     "canvas": "2.5.0",
     "express": "4.16.4",
+    "morphoviewer-node": "^0.1.15",
+    "swcmorphologyparser": "^0.1.4",
     "three": "0.104.0",
     "three-canvas-renderer": "2.0.0"
   },
