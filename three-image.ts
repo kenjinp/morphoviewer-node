@@ -2,13 +2,17 @@ import { MorphoViewer } from "morphoviewer-node";
 import { SwcParser } from "swcmorphologyparser";
 import { readFileSync } from "fs";
 import { resolve } from "path";
+import { Canvas } from "canvas";
 
 const logWithDate = startDate => message =>
   console.log(`${Date.now() - startDate} ${message}`);
 
 export default () => {
+  const h = 600;
+  const w = 600;
   const log = logWithDate(Date.now());
-  const morphoViewer = new MorphoViewer();
+  const canvas = new Canvas(w, h);
+  const morphoViewer = new MorphoViewer(canvas);
   // return canvas.toBuffer(mimeType);
   log("reading file");
   const data = readFileSync(resolve(__dirname, "./Morphology.swc"), "utf8");
@@ -23,7 +27,7 @@ export default () => {
     // last param is "do we focus the camera on it"
     morphoViewer.addMorphology(rawMorpho, {
       focusOn: true, // do we want the camera to focus on this one when it's loaded?
-      asPolyline: false, // with polylines of with cylinders?
+      asPolyline: true, // with polylines of with cylinders?
       onDone: null, // what to do when it's loaded?
       //color: Math.floor(Math.random() * 0xFFFFFF), // if not present, all neurones will have there axon in blue, basal dendrite in red and apical dendrite in green
       somaMode: "fromOrphanSections"

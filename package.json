@@ -9,9 +9,9 @@
     "now-build": "node ./build.js"
   },
   "dependencies": {
-    "canvas": "2.5.0",
+    "canvas": "^2.5.0",
     "express": "4.16.4",
-    "morphoviewer-node": "^0.1.15",
+    "morphoviewer-node": "^0.1.18",
     "swcmorphologyparser": "^0.1.4",
     "three": "0.104.0",
     "three-canvas-renderer": "2.0.0"

@@ -120,7 +120,7 @@ camelcase@^2.0.0:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-2.1.1.tgz#7c1d16d679a1bbe59ca02cacecfb011e201f5a1f"
   integrity sha1-fB0W1nmhu+WcoCys7PsBHiAfWh8=
 
-canvas@2.5.0, canvas@^2.5.0:
+canvas@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/canvas/-/canvas-2.5.0.tgz#cf0ef59d4790575689c0d50e59c7b8023a11f38a"
   integrity sha512-wwRz2cLMgb9d+rnotOJCoc04Bzj3aJMpWc6JxAD6lP7bYz0ldcn0sKddoZ0vhD5T8HBxrK+XmRDJb68/2VqARw==
@@ -659,12 +659,11 @@ morphologycorejs@^0.1.10:
   resolved "https://registry.yarnpkg.com/morphologycorejs/-/morphologycorejs-0.1.10.tgz#abce3835258e324a2d449639e2bea70f2bc513ed"
   integrity sha512-0ITVXg69s3xJXmVh7BisHutwmp514NG/aztBphndTwLQusaul3aGeuO3am1tHvUA/CkRW1UawNSBVqFatFHUKQ==
 
-morphoviewer-node@^0.1.15:
-  version "0.1.15"
-  resolved "https://registry.yarnpkg.com/morphoviewer-node/-/morphoviewer-node-0.1.15.tgz#53e9b50417a358b4e3a8c8ec121cf91a1f58c93d"
-  integrity sha512-xvRqVIsqSzeDE4K5B4X5th3Hj3nM28EQr/DheJm7IIj3r70EsFMtW19KtXP5jNdzQeBH82n9Q1mwWTWnF+20jw==
+morphoviewer-node@^0.1.18:
+  version "0.1.18"
+  resolved "https://registry.yarnpkg.com/morphoviewer-node/-/morphoviewer-node-0.1.18.tgz#92ed4ff35f970121b615909caebd83ca8ea59c2e"
+  integrity sha512-B0bTtEWIpZPWNW/noUKuBfkeA9fcxX8buKuEOG78kV2BmFiIAwVwigSJ4+hqD3qc06fvd16qA2vp18LRqnbUeg==
   dependencies:
-    canvas "^2.5.0"
     codecutils "^0.1.3"
     morphologycorejs "^0.1.10"
     pako "^1.0.6"
